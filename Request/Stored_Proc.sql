@@ -87,14 +87,14 @@ AS $$
 DECLARE RealSumm FLOAT DEFAULT 0;
 DECLARE MaxSumm FLOAT DEFAULT 0;
 BEGIN
-	SELECT SUM(Tasks.Balls*Task_Statuses.Multiplier), SUM(Task.Balls) 
+	SELECT SUM(Tasks.Balls*Task_Statuses.Multiplier), SUM(Taskы.Balls) 
 	INTO RealSumm, MaxSumm
 	FROM Tasks, Task_Statuses
 	WHERE Tasks.ID_Employer = My_ID_Employ
 		AND Task_Statuses.ID = Tasks.ID_Status
 		AND EXTRACT(YEAR FROM Tasks.Close_Date) = MyYear
 		AND EXTRACT(MONTH FROM Tasks.Close_Date) = MyMonth
-		AND Task.Act;
+		AND Task.Activity;
     RETURN RealSumm/MaxSumm;
 END;
 $$;
