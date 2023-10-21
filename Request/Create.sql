@@ -44,8 +44,8 @@ CREATE TABLE Task_Statuses(
 CREATE TABLE Tasks(
     ID SERIAL PRIMARY KEY,
     ID_Employer INT NOT NULL,
-    Create_Date DATE,
-    Close_Date DATE,
+    Create_Date TIMESTAMPTZ,
+    Close_Date TIMESTAMPTZ,
     ID_Template INT NOT NULL,
     Balls FLOAT NOT NULL,
     ID_Status INT NOT NULL,
