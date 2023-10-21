@@ -50,6 +50,8 @@ CREATE TABLE Tasks(
     Balls FLOAT NOT NULL,
     ID_Status INT NOT NULL,
     Activity BOOLEAN NOT NULL,
+	Ready BOOLEAN NOT NULL,
+	CountTry INT NOT NULL,
 	FOREIGN KEY (ID_Employer) REFERENCES Employers(ID),
 	FOREIGN KEY (ID_Template) REFERENCES Task_Templates(ID),
 	FOREIGN KEY (ID_Status) REFERENCES Task_Statuses(ID)
