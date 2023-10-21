@@ -94,7 +94,7 @@ BEGIN
 		AND Task_Statuses.ID = Tasks.ID_Status
 		AND EXTRACT(YEAR FROM Tasks.Close_Date) = MyYear
 		AND EXTRACT(MONTH FROM Tasks.Close_Date) = MyMonth
-		AND Task.Activity;
+		AND Tasks.Activity;
     RETURN RealSumm/MaxSumm;
 END;
 $$;
