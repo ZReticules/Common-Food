@@ -46,25 +46,11 @@ CREATE TABLE Tasks(
     ID_Employer INT NOT NULL,
     Create_Date DATE,
     Close_Date DATE,
-    ID_Temlate INT NOT NULL,
+    ID_Template INT NOT NULL,
     Balls FLOAT NOT NULL,
     ID_Status INT NOT NULL,
     Activity BOOLEAN NOT NULL,
 	FOREIGN KEY (ID_Employer) REFERENCES Employers(ID),
-	FOREIGN KEY (ID_Temlate) REFERENCES Task_Templates(ID),
+	FOREIGN KEY (ID_Template) REFERENCES Task_Templates(ID),
 	FOREIGN KEY (ID_Status) REFERENCES Task_Statuses(ID)
 );
--- CREATE OR REPLACE FUNCTION GetRestId(City VARCHAR(30))
--- RETURNS INTEGER
--- LANGUAGE PLPGSQL
--- AS $$
--- #variable_conflict use_variable
--- DECLARE OutVar INTEGER DEFAULT 0;
--- BEGIN
--- 	SELECT Restaurants.ID 
--- 	INTO OutVar
--- 	FROM Restaurants
--- 	WHERE Restaurants.City = City;
---     RETURN OutVar;
--- END;
--- $$;

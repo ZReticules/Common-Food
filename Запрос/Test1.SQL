@@ -1,0 +1,4 @@
+CREATE TABLE TesTable(
+    ID SERIAL PRIMARY KEY,
+    Name VARCHAR(30)
+)
