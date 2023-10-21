@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS Employers;
 DROP TABLE IF EXISTS Tasks;
+DROP TABLE IF EXISTS Employers;
 DROP TABLE IF EXISTS Roles;
 DROP TABLE IF EXISTS Restaurants;
 DROP TABLE IF EXISTS Task_Templates;
@@ -13,7 +13,8 @@ CREATE TABLE Roles(
 CREATE TABLE Restaurants(
 	ID SERIAL PRIMARY KEY,
 	Address VARCHAR(100) NOT NULL,
-	City VARCHAR(30) NOT NULL
+	City VARCHAR(30) NOT NULL,
+    UNIQUE (Address, City)
 );
 
 CREATE TABLE Employers(
@@ -23,14 +24,14 @@ CREATE TABLE Employers(
 	ID_Restaurant INT NOT NULL,
 	ID_Role INT NOT NULL,
 	Login VARCHAR(30) UNIQUE NOT NULL,
-	Password VARCHAR(30) NOT NULL,
+	Password VARCHAR(100) NOT NULL,
 	FOREIGN KEY (ID_Restaurant) REFERENCES Restaurants(ID),
 	FOREIGN KEY (ID_Role) REFERENCES Roles(ID)
 );
 
 CREATE TABLE Task_Templates(
     ID SERIAL PRIMARY KEY,
-    Name VARCHAR(20) NOT NULL,
+    Name VARCHAR(100) NOT NULL,
     Template BYTEA
 );
 
@@ -53,27 +54,17 @@ CREATE TABLE Tasks(
 	FOREIGN KEY (ID_Temlate) REFERENCES Task_Templates(ID),
 	FOREIGN KEY (ID_Status) REFERENCES Task_Statuses(ID)
 );
-
-INSERT INTO Roles VALUES (DEFAULT, 'Сотрудник'),
-	(DEFAULT, 'Менеджер');
-
-
-INSERT INTO TASK_Statuses VALUES (DEFAULT, 'Открыта', 0.0),
-	(DEFAULT, 'Закрыта в срок', 1.0),
-	(DEFAULT, 'Просрочена', -0.5),
-	(DEFAULT, 'Выполнена с просрочкой', 0.5),
-	(DEFAULT, 'Провалена', -1.0)
-
-CREATE OR REPLACE FUNCTION MyTest(IN MVAR VARCHAR(30))
-RETURNS TABLE(
-	ID INT,
-	Name VARCHAR(100)
-)
-LANGUAGE PLPGSQL
-AS $$
-BEGIN
-	RETURN QUERY(
-		SELECT * FROM Roles WHERE NAME = MVAR
-	);
-END;
-$$;
+-- CREATE OR REPLACE FUNCTION GetRestId(City VARCHAR(30))
+-- RETURNS INTEGER
+-- LANGUAGE PLPGSQL
+-- AS $$
+-- #variable_conflict use_variable
+-- DECLARE OutVar INTEGER DEFAULT 0;
+-- BEGIN
+-- 	SELECT Restaurants.ID 
+-- 	INTO OutVar
+-- 	FROM Restaurants
+-- 	WHERE Restaurants.City = City;
+--     RETURN OutVar;
+-- END;
+-- $$;
