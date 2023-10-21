@@ -57,7 +57,7 @@ RETURNS TABLE (
 	Status_Name VARCHAR(100),
 	Balls FLOAT,
 	Status_Mult FLOAT,
-	TaskActive BOOL
+	TaskActive BOOLEAN
 )
 LANGUAGE PLPGSQL
 AS $$
