@@ -87,7 +87,7 @@ AS $$
 DECLARE RealSumm FLOAT DEFAULT 0;
 DECLARE MaxSumm FLOAT DEFAULT 0;
 BEGIN
-	SELECT SUM(Tasks.Balls*Task_Statuses.Multiplier), SUM(Taskы.Balls) 
+	SELECT SUM(Tasks.Balls*Task_Statuses.Multiplier), SUM(Tasks.Balls) 
 	INTO RealSumm, MaxSumm
 	FROM Tasks, Task_Statuses
 	WHERE Tasks.ID_Employer = My_ID_Employ
