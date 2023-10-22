@@ -115,7 +115,30 @@ BEGIN
 END;
 $$;
 CREATE OR REPLACE TRIGGER TaskUpdTrigger
-  AFTER UPDATE OF Ready
-  ON TASKS
-  FOR EACH ROW
-  EXECUTE PROCEDURE Tasks_NewTry();
+AFTER UPDATE OF Ready
+ON TASKS
+FOR EACH ROW
+	EXECUTE PROCEDURE Tasks_NewTry();
+
+DROP FUNCTION GetEmployAndBalls;
+CREATE OR REPLACE FUNCTION GetEmployAndBalls(MyYear INT, MyMonth INT)
+RETURNS TABLE (
+	EID INT,
+	FIO VARCHAR(100),
+	Rating FLOAT
+)
+LANGUAGE PLPGSQL
+AS $$
+BEGIN
+	return query(
+		SELECT Employers.ID, 
+		Employers.FIO, 
+		SummEmployBalls(
+			ID, 
+			GetEmployAndBalls.MyYear, 
+			GetEmployAndBalls.MyMonth
+		)
+		FROM Employers
+	);
+END;
+$$;
